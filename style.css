@@ -1,0 +1,28 @@
+body {
+    background-image: url("./img/ron-swanson.jpg");
+    font-family: 'Open sans', sans-serif;
+    margin: 0;
+}
+body > div {
+    margin-bottom: 20px;
+}
+.quote {
+    font-size: 40px;
+    color: #FFF;
+    position: absolute;
+    bottom: 0;
+    background: rgba(45, 32, 23, 0.51);
+    padding: 10px;
+}
+.get-quote {
+    -webkit-appearance: none;
+    background: #2d2017;
+    color: #FFF;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+input {
+    padding: 8px 15px;
+    border: none;
+}
