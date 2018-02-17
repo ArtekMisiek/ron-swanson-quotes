@@ -9,7 +9,7 @@ const quoteListInput = document.body.querySelector('#how-many-quotes');
 /* Single quote*/
 function* quoteGenerator() {
     while (true) {
-        yield fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes')
+        yield fetch('https://ron-swanson-quotes.herokuapp.com/v2/quotes')
             .then(res => res.json());
     }
 }
