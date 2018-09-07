@@ -1,4 +1,3 @@
-
 'use strict';
 
 const quoteButton = document.body.querySelector('#get-quote');
@@ -27,7 +26,6 @@ function updateQuote() {
 
 quoteButton.addEventListener("click", () => updateQuote());
 
-
 updateQuote();
 
 
@@ -38,16 +36,18 @@ function* quoteListGenerator() {
             .then(res => res.json());
     }
 }
-/*
-const generatorList = quoteListGenerator();
 
+const generatorList = quoteListGenerator();
 
 function updateQuoteList() {
     quoteOutput.innerHTML = "";
-    var howManyQuotes = quoteListInput.value;
+    let howManyQuotes = parseInt(quoteListInput.value, 10);
+    let tempHowManyQuotes = howManyQuotes;
 
-    if (howManyQuotes = "" || howManyQuotes == 0) {
+    if (tempHowManyQuotes == 0 || tempHowManyQuotes == null || isNaN(tempHowManyQuotes)) {
         howManyQuotes = 1;
+    } else if (tempHowManyQuotes > 3) {
+        howManyQuotes = 3;
     }
 
     quoteButtonList.disabled = true;
@@ -55,21 +55,22 @@ function updateQuoteList() {
     for (let i = 0; i < howManyQuotes; i++) {
         generatorList.next().value.then(function (data) {
             let p = document.createElement("p");
-            p.id = howManyQuotes;
-
+            p.id = "quote-nr-" + i;
 
             p.innerHTML = `"${data[0]}"`;
             quoteOutput.appendChild(p);
-            quoteButtonList.disabled = false;
-
-
         });
     }
-
+    quoteButtonList.disabled = false;
 }
-
 
 quoteButtonList.addEventListener("click", () => updateQuoteList());
 
-*/
-
+function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds) {
+            break;
+        }
+    }
+}
