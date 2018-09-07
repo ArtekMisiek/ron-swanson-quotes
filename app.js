@@ -28,7 +28,6 @@ quoteButton.addEventListener("click", () => updateQuote());
 
 updateQuote();
 
-
 /* LIST */
 function* quoteListGenerator(count) {
     while (true) {
@@ -36,7 +35,6 @@ function* quoteListGenerator(count) {
             .then(res => res.json());
     }
 }
-
 
 function updateQuoteList() {
 
@@ -53,19 +51,17 @@ function updateQuoteList() {
 
     quoteButtonList.disabled = true;
 
-    // for (let i = 0; i < howManyQuotes; i++) {
-        generatorList.next().value.then(function (data) {
-            data.forEach(element => {
-                let p = document.createElement("p");
-                p.id = "quote";
-    
-                p.innerHTML = `"${element}"`;
-                quoteOutput.appendChild(p);
-                quoteButtonList.disabled = false;
-            });
-           
+    generatorList.next().value.then(function (data) {
+        data.forEach(element => {
+            let p = document.createElement("p");
+            p.id = "quote";
+
+            p.innerHTML = `"${element}"`;
+            quoteOutput.appendChild(p);
+            quoteButtonList.disabled = false;
         });
-    // }
+
+    });
 }
 
 quoteButtonList.addEventListener("click", () => updateQuoteList());
