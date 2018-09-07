@@ -30,16 +30,16 @@ updateQuote();
 
 
 /* LIST */
-function* quoteListGenerator() {
+function* quoteListGenerator(count) {
     while (true) {
-        yield fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes/')
+        yield fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes/' + count)
             .then(res => res.json());
     }
 }
 
-const generatorList = quoteListGenerator();
 
 function updateQuoteList() {
+
     quoteOutput.innerHTML = "";
     let howManyQuotes = parseInt(quoteListInput.value, 10);
     let tempHowManyQuotes = howManyQuotes;
@@ -49,19 +49,23 @@ function updateQuoteList() {
     } else if (tempHowManyQuotes > 3) {
         howManyQuotes = 3;
     }
+    const generatorList = quoteListGenerator(howManyQuotes);
 
     quoteButtonList.disabled = true;
 
-    for (let i = 0; i < howManyQuotes; i++) {
+    // for (let i = 0; i < howManyQuotes; i++) {
         generatorList.next().value.then(function (data) {
-            let p = document.createElement("p");
-            p.id = "quote-nr-" + i;
-
-            p.innerHTML = `"${data[0]}"`;
-            quoteOutput.appendChild(p);
+            data.forEach(element => {
+                let p = document.createElement("p");
+                p.id = "quote";
+    
+                p.innerHTML = `"${element}"`;
+                quoteOutput.appendChild(p);
+                quoteButtonList.disabled = false;
+            });
+           
         });
-    }
-    quoteButtonList.disabled = false;
+    // }
 }
 
 quoteButtonList.addEventListener("click", () => updateQuoteList());
